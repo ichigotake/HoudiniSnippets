@@ -19,7 +19,9 @@ def generate_exporting_nodes(node):
                 if not hou.node('/obj/' + name):
                     print name
                     g = hou.node('/obj').createNode('geo', name)
-                    g.moveToGoodPosition()
+                    # エクスポート時にしか使わないノードだからいらない気がする
+                    # まとめて消せるように、移動させない方がよさそう
+                    #g.moveToGoodPosition()
                     om = g.createNode('object_merge', 'object_merge')
                     om.parm('objpath1').set(om.relativePathTo(child))
         generate_exporting_nodes(child)
